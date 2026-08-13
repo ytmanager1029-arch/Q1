@@ -1,0 +1,212 @@
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/500.css";
+@import "@fontsource/geist-sans/600.css";
+@import "@fontsource/geist-sans/700.css";
+@import "@fontsource/geist-mono/400.css";
+@import "@fontsource/geist-mono/500.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f7f7f5;
+  --bg-2: #eeeeea;
+  --ink: #0a0a0a;
+  --mute: #6b6b6b;
+  --line: #d9d9d4;
+  --oxide: #b5441c;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Geist Sans", Inter, "Helvetica Neue", system-ui, sans-serif;
+  font-feature-settings: "ss01" on, "cv11" on;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #0a0a0a;
+  color: #f7f7f5;
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 1px solid #0a0a0a;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 80;
+  background: #0a0a0a;
+  color: #f7f7f5;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.8rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Paper grain */
+body::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(10, 10, 10, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 10, 10, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.hairline {
+  background: var(--line);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-d1 {
+  transition-delay: 80ms;
+}
+.reveal-d2 {
+  transition-delay: 160ms;
+}
+.reveal-d3 {
+  transition-delay: 240ms;
+}
+
+.link-arrow svg {
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-arrow:hover svg,
+.link-arrow:focus-visible svg {
+  transform: translateX(4px);
+}
+
+.img-reveal {
+  overflow: hidden;
+}
+
+.img-reveal img {
+  transform: scale(1.04);
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.img-reveal:hover img {
+  transform: scale(1);
+}
+
+.service-row {
+  transition: background-color 220ms ease;
+}
+
+.service-row:hover,
+.service-row:focus-visible {
+  background: #eeeeea;
+}
+
+.service-row .svc-arrow {
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-row:hover .svc-arrow,
+.service-row:focus-visible .svc-arrow {
+  transform: translateX(6px);
+}
+
+.filter-btn[aria-pressed="true"] {
+  background: #0a0a0a;
+  color: #f7f7f5;
+}
+
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-panel.open {
+  grid-template-rows: 1fr;
+}
+
+.faq-panel > div {
+  overflow: hidden;
+}
+
+input,
+select,
+textarea {
+  border-radius: 0;
+}
+
+.field-error {
+  color: #b5441c;
+}
+
+.admin-table th {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.is-in,
+  .img-reveal img,
+  .link-arrow svg,
+  .service-row .svc-arrow,
+  .faq-panel {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
