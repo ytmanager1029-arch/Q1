@@ -180,15 +180,26 @@ Sample work and testimonials are marked as placeholders.
 
 ## Vercel (frontend)
 
-1. Import the GitHub repository.
-2. Framework: Vite.
-3. Root can stay the repository root (uses `vercel.json`) **or** set the project root to `client`.
-4. Build command: `npm run build -w client` (root) or `npm run build` (client root).
-5. Output: `client/dist` (root) or `dist` (client root).
-6. Environment:
-   - `VITE_API_URL` = `https://<your-render-service>.onrender.com`
-   - `VITE_SITE_URL` = `https://<your-vercel-domain>`
-7. Redeploy after changing `VITE_*` variables.
+This is an npm workspace. Vercel’s default Vite command (`vite build`) fails with **exit 127** if it runs from the repo root, because Vite lives in the `client` workspace.
+
+Use these settings (Project → Settings → General → Build & Development Settings → Override):
+
+| Setting | Value |
+| --- | --- |
+| Framework Preset | Vite |
+| Root Directory | _leave empty_ (repository root) |
+| Install Command | `npm install` |
+| Build Command | `npm run build -w client` |
+| Output Directory | `client/dist` |
+
+Do **not** set Root Directory to `client`. Do **not** leave Build Command as `vite build`.
+
+Environment:
+
+- `VITE_API_URL` = `https://<your-render-service>.onrender.com`
+- `VITE_SITE_URL` = `https://<your-vercel-domain>`
+
+Redeploy after changing `VITE_*` variables.
 
 ## Render (backend)
 
